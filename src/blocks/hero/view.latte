@@ -1,0 +1,24 @@
+{var $is_dark_cls = $inspector_bg_is_dark['checked'] ? ' dark' : ''}
+
+<section 
+  class="hero-main {$is_dark_cls}"
+  n:if="$title['text']"
+>
+  <div class="hero-main__cont">
+    {tr_get_media('logo.svg', true)}
+    {tr_get_media('logo.svg')}
+    {tr_get_media('testimg.jpg')}
+    {tr_get_media('testimg.jpg', true)}
+
+    <h1 n:ifcontent>{$title['text']}</h1>
+    <p n:ifcontent>{$text['text']}</p>
+
+    {do dump($title)}
+
+
+    {tr_a($cta, "btn btn--brand")}
+
+    {include tr_part('test')}
+  </div>{* cont *}
+</section>
+

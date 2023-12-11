@@ -1,0 +1,21 @@
+.wp-figure-test {
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--c-brand);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &.dark {
+    background: #000;
+  }
+
+  figcaption {
+    color: #fff;
+    padding-top: 10px;
+  }
+}
+
+.wp-figure-test .tr-img-wrap-outer {
+  max-width: 100%;
+}

@@ -1,0 +1,31 @@
+{var $is_dark_cls = $inspector_bg_is_dark['checked'] ? ' dark' : ''}
+
+
+<ol 
+  n:if="!empty($breadcrumbs)"
+  class="breadcrumbs {$is_dark_cls}"
+  itemscope itemtype="https://schema.org/BreadcrumbList"
+>
+{foreach $breadcrumbs as $breadcrumb}
+  <li 
+    itemprop="itemListElement" 
+    itemscope
+    itemtype="https://schema.org/ListItem"
+  >
+    <a 
+      itemprop="item" 
+      href="{$breadcrumb['link']['url']}" 
+    >
+      <span itemprop="name">
+        {$breadcrumb['link']['title']|noescape}
+      </span>
+    </a>
+    <meta itemprop="position" content="{$iterator->counter}" />
+  </li>
+
+  <li 
+    n:if="!$iterator->last"
+    class="separator"
+  >/</li>
+{/foreach}
+</ol>

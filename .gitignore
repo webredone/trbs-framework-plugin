@@ -1,0 +1,6 @@
+node_modules
+vendor
+
+dist
+
+# TODO: add vendor as well, and write steps on how to start locally besides composer install
