@@ -1,7 +1,7 @@
 const path = require('path')
 const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
 
-module.exports = {
+const webpackDevConfig = {
   mode: 'development',
   entry: {
     blocks: path.resolve(__dirname, './src/blocks.js')
@@ -27,3 +27,5 @@ module.exports = {
     ]
   }
 }
+
+module.exports = webpackDevConfig

@@ -11,10 +11,10 @@ const { RichText } = wp.blockEditor
 const { useState, useEffect } = wp.element
 const { __ } = wp.i18n
 
-import trUpdateField from '../../helpers/trUpdateField'
-import showAlertIfMaxCharsExceeded from '../../helpers/showAlertIfMaxCharsExceeded'
-import { stripHtmlAndReturnText } from '../../helpers/stripHtmlAndReturnText'
-import TrTooltip from '../TrTooltip'
+import trUpdateField from '../../helpers/trUpdateField.js'
+import showAlertIfMaxCharsExceeded from '../../helpers/showAlertIfMaxCharsExceeded.js'
+import { stripHtmlAndReturnText } from '../../helpers/stripHtmlAndReturnText.js'
+import TrTooltip from '../TrTooltip.js'
 
 const TrText = ({ fieldData }) => {
   const { field_object, meta } = fieldData

@@ -1,5 +1,5 @@
-import register_block from './register_block'
-import setupBlockPreviewImage from './core/framework-logic/setupBlockPreviewImage'
+import register_block from './register_block.js'
+import setupBlockPreviewImage from './core/framework-logic/setupBlockPreviewImage.js'
 
 const blocks_array_config = require('./core/blocks_array.json')
 const blocks_array = blocks_array_config.blocks_array

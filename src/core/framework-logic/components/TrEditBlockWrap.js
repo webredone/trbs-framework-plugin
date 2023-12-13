@@ -4,8 +4,8 @@ const { Dashicon } = wp.components
 import {
   trBlockImagePreviewShow,
   trBlockImagePreviewHide
-} from '../helpers/trBlockImagePreview'
-import TrTooltip from './TrTooltip'
+} from '../helpers/trBlockImagePreview.js'
+import TrTooltip from './TrTooltip.js'
 // const { useEffect } = wp.element;
 
 const TrEditBlockWrap = ({

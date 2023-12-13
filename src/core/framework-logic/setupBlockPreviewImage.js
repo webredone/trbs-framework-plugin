@@ -1,7 +1,7 @@
 import {
   trBlockImagePreviewShow,
   trBlockImagePreviewHide
-} from './helpers/trBlockImagePreview'
+} from './helpers/trBlockImagePreview.js'
 
 const BLOCK_NAME_PREFIX = require('../config.json').BLOCK_PREFIX
 

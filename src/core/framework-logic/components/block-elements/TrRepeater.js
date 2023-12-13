@@ -2,10 +2,10 @@ const { useState, Fragment } = wp.element
 const { Button, Dashicon, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
 
-import TrField from './TrField'
-import TrTooltip from '../TrTooltip'
-import { reorderItems } from '../../helpers/reorderItems'
-import TrRepeaterRepeater from './TrRepeaterRepeater'
+import TrField from './TrField.js'
+import TrTooltip from '../TrTooltip.js'
+import { reorderItems } from '../../helpers/reorderItems.js'
+import TrRepeaterRepeater from './TrRepeaterRepeater.js'
 
 const two_cols_variations = ['2', '2-1', '1-2']
 

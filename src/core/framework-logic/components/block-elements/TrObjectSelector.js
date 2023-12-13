@@ -15,8 +15,8 @@ const { useState, useEffect } = wp.element
 const apiFetch = wp.apiFetch
 const { decodeEntities } = wp.htmlEntities
 
-import trUpdateField from '../../helpers/trUpdateField'
-import TrTooltip from '../TrTooltip'
+import trUpdateField from '../../helpers/trUpdateField.js'
+import TrTooltip from '../TrTooltip.js'
 
 const NAMESPACE = 'tr_guten_blocks'
 

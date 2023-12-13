@@ -2,7 +2,7 @@ import TrDefaultFieldsHandler from '../../core/framework-logic/components/block-
 
 const EditMain = props => {
   const { className } = props
-
+  
   return (
     <div className={`${className}`}>
       <TrDefaultFieldsHandler data={{ ...props }} />

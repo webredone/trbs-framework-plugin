@@ -3,7 +3,7 @@ const { __ } = wp.i18n
 
 import trUpdateField from '../../helpers/trUpdateField'
 
-import TrTooltip from '../TrTooltip'
+import TrTooltip from '../TrTooltip.js'
 
 const TrCheckbox = ({ fieldData }) => {
   const { field_object, meta } = fieldData

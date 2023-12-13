@@ -6,7 +6,7 @@ const clearAndUpper = text => text.replace(/_/, ' ').toUpperCase()
 const toPascalCase = text => text.replace(/(^\w|_\w)/g, clearAndUpper)
 
 // Makes the block collapsible in the editor
-import TrEditBlockWrap from './core/framework-logic/components/TrEditBlockWrap'
+import TrEditBlockWrap from './core/framework-logic/components/TrEditBlockWrap.js'
 
 const BLOCK_NAME_PREFIX = require('./core/config.json').BLOCK_PREFIX
 

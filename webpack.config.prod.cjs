@@ -1,8 +1,9 @@
 const path = require('path')
-const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
-const TerserPlugin = require('terser-webpack-plugin')
 
-module.exports = {
+const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
+const TerserPlugin = require('terser-webpack-plugin') 
+
+const webpackProdConfig ={
   mode: 'production',
   entry: {
     blocks: path.resolve(__dirname, './src/blocks.js')
@@ -36,3 +37,6 @@ module.exports = {
     ]
   }
 }
+
+
+module.exports = webpackProdConfig

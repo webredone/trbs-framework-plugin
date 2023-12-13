@@ -2,8 +2,8 @@ const { MediaUpload } = wp.blockEditor
 const { Button, Card, CardHeader, CardBody, Dashicon } = wp.components
 const { __ } = wp.i18n
 
-import trUpdateField from '../../helpers/trUpdateField'
-import TrTooltip from '../TrTooltip'
+import trUpdateField from '../../helpers/trUpdateField.js'
+import TrTooltip from '../TrTooltip.js'
 
 const TrImage = ({ fieldData }) => {
   const { field_object, meta } = fieldData

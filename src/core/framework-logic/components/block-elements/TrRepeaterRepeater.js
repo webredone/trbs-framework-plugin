@@ -2,9 +2,9 @@ const { useState } = wp.element
 const { Button, Dashicon, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
 
-import TrField from './TrField'
-import TrTooltip from '../TrTooltip'
-import { reorderItems } from '../../helpers/reorderItems'
+import TrField from './TrField.js'
+import TrTooltip from '../TrTooltip.js'
+import { reorderItems } from '../../helpers/reorderItems.js'
 
 const TrRepeaterRepeater = ({ fieldData }) => {
   const {

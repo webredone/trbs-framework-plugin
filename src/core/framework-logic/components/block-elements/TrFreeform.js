@@ -4,8 +4,8 @@ const { Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
 
 import { v4 as uuidv4 } from 'uuid'
-import trUpdateField from '../../helpers/trUpdateField'
-import TrTooltip from '../TrTooltip'
+import trUpdateField from '../../helpers/trUpdateField.js'
+import TrTooltip from '../TrTooltip.js'
 
 const TrFreeform = ({ fieldData }) => {
   const { field_object, meta } = fieldData
