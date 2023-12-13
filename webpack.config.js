@@ -1,6 +1,3 @@
-// const path = require('path')
-// const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
-
 import path from 'path';
 import url from 'url';
 

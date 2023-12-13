@@ -1,7 +1,3 @@
-// const path = require('path')
-// const TerserPlugin = require('terser-webpack-plugin') 
-// const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
-
 import path from 'path';
 import url from 'url';
 import TerserPlugin from 'terser-webpack-plugin';
