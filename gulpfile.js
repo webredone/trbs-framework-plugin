@@ -22,10 +22,11 @@ import webpack from 'webpack';
 import sveltePlugin from 'esbuild-svelte';
 import { vue3Plugin } from 'esbuild-plugin-vue-iii';
 
-import config from './gulpfile_config.js';
+import compilation_config from './gulpfile_config.js';
+const { config, config_webpack_js_admin_blocks } = compilation_config;
 
-import webpackConfigDev from './webpack.config.cjs';
-import webpackConfigProd from './webpack.config.prod.cjs';
+import webpackConfigDev from './webpack.config.js';
+import webpackConfigProd from './webpack.config.prod.js';
 
 const gulpEsbuild = createGulpEsbuild({ piping: true });
 const browser = browserSync.create();
@@ -35,26 +36,8 @@ const cssOutputStyle = shouldMinify ? 'compressed' : 'expanded';
 
 
 
-// TODO: Move to a separate file
-const config_webpack_js_admin_blocks = {
-  watch: [
-    './src/core/framework-logic/blocks.js',
-    './src/core/framework-logic/register_block.js',
-    './src/blocks/**/*.js',
-    '!./src/blocks/**/frontend.js', // Exclude frontend.js files
-    '!./src/blocks/**/frontend-js/*.js', // Exclude frontend.js files
-    '!./src/blocks/**/frontend-js/**/*.js', // Exclude frontend.js files
-    './src/blocks_shared_css_and_js/**/*.js',
-    './src/core/blocks_array.json',
-    './src/core/framework-logic/components/**/*.js',
-    './src/core/framework-logic/helpers/**/*.js',
-    './src/blocks/**/model.json',
-    './src/blocks/**/EditMain.js',
-    './src/blocks/**/EditSidebar.js',
-    './src/blocks/**/View.js'
-  ]
-}
 
+// TODO: Should we use NODE_ENV
 const webpackConfig =
   process.env.NODE_ENV === 'production'
     ? webpackConfigDev
@@ -86,12 +69,12 @@ function compileSCSS(key) {
       .pipe(gulp.dest(cssConfig.dest))
       .pipe(browser.stream())
       .on('finish', done);
-    };
+  };
 
 
-    task.displayName = `compileSCSS:${key}`; // Set the display name
-    return task
-  }
+  task.displayName = `compileSCSS:${key}`; // Set the display name
+  return task
+}
 
 
 
@@ -131,26 +114,25 @@ function compileJS(key) {
 // run webpack to compile Gutenberg backend JS
 // TODO: Fix this fn not working
 function compileGutenbergBackendJS(done) {
-  return new Promise((resolve, reject) => {
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        return reject(err)
-      }
-
-      if (stats.hasErrors()) {
-        return reject(new Error(stats))
-      }
-      resolve()
-      done()
-    })
-  })
+  webpack(webpackConfig, (err, stats) => {
+    if (err) {
+      console.error('Webpack error:', err);
+      done(err); // Signal task completion with error
+    } else if (stats.hasErrors()) {
+      console.error('Webpack compilation errors:', stats.toJson().errors);
+      done(new Error('Webpack compilation errors')); // Signal task completion with error
+    } else {
+      console.log('Webpack compilation successful');
+      done(); // Signal successful task completion
+    }
+  });
 }
 
 function copyGutenbergBlocksFiles(done) {
   gulp
     .src('./src/blocks/**/model.json')
     .pipe(gulp.dest('./dist/block-specific'))
-    .on('end', done); // Ensure the task signals completion
+    .on('end', done);
 }
 
 function serve() {
@@ -166,10 +148,8 @@ function serve() {
   )
 
   // Watch for Gutenberg Backend Blocks JS (Handled via WebPack)
-  gulp.watch(
-    config_webpack_js_admin_blocks.watch,
-    gulp.series(compileGutenbergBackendJS, browser.reload)
-  )
+  gulp.watch(config_webpack_js_admin_blocks.watch, compileGutenbergBackendJS);
+
 
   // Watch for CSS changes
  Object.keys(config.css).forEach((key) => {

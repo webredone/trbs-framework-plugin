@@ -59,4 +59,30 @@ const config = {
 }
 
 
-export default config
+const config_webpack_js_admin_blocks = {
+  watch: [
+    './src/core/framework-logic/blocks.js',
+    './src/core/framework-logic/register_block.js',
+    './src/blocks/**/*.js',
+    '!./src/blocks/**/frontend.js', // Exclude frontend.js files
+    '!./src/blocks/**/frontend-js/*.js', // Exclude frontend.js files
+    '!./src/blocks/**/frontend-js/**/*.js', // Exclude frontend.js files
+    './src/blocks_shared_css_and_js/**/*.js',
+    './src/core/blocks_array.json',
+    './src/core/framework-logic/components/**/*.js',
+    './src/core/framework-logic/helpers/**/*.js',
+    './src/blocks/**/model.json',
+    './src/blocks/**/EditMain.js',
+    './src/blocks/**/EditSidebar.js',
+    './src/blocks/**/View.js'
+  ]
+}
+
+// export default config
+
+const compilation_config = {
+  config,
+  config_webpack_js_admin_blocks
+}
+
+export default compilation_config

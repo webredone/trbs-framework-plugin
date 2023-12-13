@@ -1,5 +1,12 @@
-const path = require('path')
-const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
+// const path = require('path')
+// const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
+
+import path from 'path';
+import url from 'url';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const outputDir = path.resolve(__dirname, 'dist', 'global_admin');
+
 
 const webpackDevConfig = {
   mode: 'development',
@@ -28,4 +35,4 @@ const webpackDevConfig = {
   }
 }
 
-module.exports = webpackDevConfig
+export default webpackDevConfig;

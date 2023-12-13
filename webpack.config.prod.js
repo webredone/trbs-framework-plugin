@@ -1,7 +1,13 @@
-const path = require('path')
+// const path = require('path')
+// const TerserPlugin = require('terser-webpack-plugin') 
+// const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
 
-const outputDir = path.resolve(__dirname, 'dist', 'global_admin')
-const TerserPlugin = require('terser-webpack-plugin') 
+import path from 'path';
+import url from 'url';
+import TerserPlugin from 'terser-webpack-plugin';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const outputDir = path.resolve(__dirname, 'dist', 'global_admin');
 
 const webpackProdConfig ={
   mode: 'production',
@@ -39,4 +45,4 @@ const webpackProdConfig ={
 }
 
 
-module.exports = webpackProdConfig
+export default webpackProdConfig;
