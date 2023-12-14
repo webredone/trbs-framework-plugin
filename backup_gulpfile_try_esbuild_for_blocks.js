@@ -4,11 +4,7 @@ const gulp = require('gulp')
 const gulpif = require('gulp-if')
 const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
-
-async function getGulpSize() {
-  const size = await import('gulp-size')
-  return size.default
-}
+const size = import('gulp-size')
 
 const webpack = require('webpack')
 const { createGulpEsbuild } = require('gulp-esbuild')
@@ -21,12 +17,7 @@ const gulpSass = require('gulp-sass')
 const sass = gulpSass(sassCompiler)
 const sourcemaps = require('gulp-sourcemaps')
 const rename = require('gulp-rename')
-
-async function getAutoprefixer() {
-  const autoprefixerModule = await import('gulp-autoprefixer')
-  return autoprefixerModule.default
-}
-
+const autoprefixer = import('gulp-autoprefixer')
 const browserSync = require('browser-sync')
 const gcmq = require('gulp-group-css-media-queries')
 const minifycss = require('gulp-uglifycss')
@@ -71,10 +62,8 @@ const webpackConfig =
   process.env.NODE_ENV === 'production' ? webpackConfigDev : webpackConfigProd
 
 function compileSCSS(key) {
-  async function task(done) {
+  function task(done) {
     const cssConfig = config.css[key]
-    const autoprefixer = await getAutoprefixer()
-    const size = await getGulpSize()
 
     gulp
       .src(cssConfig.src)
@@ -190,6 +179,59 @@ function compileGutenbergBackendJS(done) {
     }
   })
 }
+// ESBuild task for compiling Gutenberg blocks
+/* function compileGutenbergBackendJS(done) {
+  return gulp
+    .src('src/blocks.js')
+    .pipe(
+      plumber({
+        errorHandler: notify.onError('Error: <%= error.message %>'),
+      }),
+    )
+    .pipe(
+      gulpEsbuild({
+        ...baseEsbuildConfig,
+        loader: {
+          ...baseEsbuildConfig.loader,
+          '.jsx': 'jsx',
+        },
+        outfile: 'blocks.min.js',
+      }),
+    )
+    .pipe(gulp.dest('dist/global_admin'))
+    .on('finish', done)
+} */
+
+// function compileGutenbergBackendJS(done) {
+//   esbuild
+//     .build({
+//       entryPoints: ['src/blocks.js'],
+//       bundle: true,
+//       minify: shouldMinify,
+//       minifySyntax: shouldMinify,
+//       jsxFactory: 'React.createElement',
+//       jsxFragment: 'React.Fragment',
+//       sourcemap: shouldMinify ? false : 'inline',
+//       platform: 'browser',
+//       globalName: 'lib',
+//       format: 'iife',
+//       supported: { destructuring: true },
+//       outfile: 'dist/global_admin/blocks.min.js',
+//       loader: {
+//         '.js': 'jsx',
+//         '.jsx': 'jsx',
+//       },
+//       plugins: [nodeExternalsPlugin()],
+//     })
+//     .then((result) => {
+//       console.log('esbuild finished:', result)
+//       done()
+//     })
+//     .catch(() => {
+//       console.error('esbuild failed')
+//       done(new Error('esbuild build failed'))
+//     })
+// }
 
 const buildBackendBlocksJS = gulp.series(
   copyGutenbergBlocksModelsFiles,

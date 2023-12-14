@@ -1,6 +1,6 @@
+const { __ } = wp.i18n
 const { MediaUpload } = wp.blockEditor
 const { Button, Card, CardHeader, CardBody, Dashicon } = wp.components
-const { __ } = wp.i18n
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -56,14 +56,14 @@ const TrImage = ({ fieldData }) => {
                 backgroundImage: field_object?.src
                   ? `url('${field_object.src}')`
                   : 'none',
-                backgroundSize: bg_size_mode
+                backgroundSize: bg_size_mode,
               }}
             />
           </div>
           <div className="image">
             {!field_object.id ? (
               <MediaUpload
-                onSelect={media => onUpdate('add', media)}
+                onSelect={(media) => onUpdate('add', media)}
                 allowedTypes={ALLOWED_TYPES}
                 value={field_object.id}
                 render={({ open }) => (
@@ -90,7 +90,7 @@ const TrImage = ({ fieldData }) => {
                     <Dashicon icon="no-alt" />
                     <span>{__(`Remove`, 'tr_blocks')}</span>
                   </Button>
-                </div>
+                </div>,
               ]
             )}
           </div>

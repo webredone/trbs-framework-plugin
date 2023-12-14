@@ -2,11 +2,11 @@ const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 const { InspectorControls } = wp.blockEditor
 
-const clearAndUpper = text => text.replace(/_/, ' ').toUpperCase()
-const toPascalCase = text => text.replace(/(^\w|_\w)/g, clearAndUpper)
+const clearAndUpper = (text) => text.replace(/_/, ' ').toUpperCase()
+const toPascalCase = (text) => text.replace(/(^\w|_\w)/g, clearAndUpper)
 
 // Makes the block collapsible in the editor
-import TrEditBlockWrap from './core/framework-logic/components/TrEditBlockWrap.js'
+import TrEditBlockWrap from './core/framework-logic/components/TrEditBlockWrap'
 
 const BLOCK_NAME_PREFIX = require('./core/config.json').BLOCK_PREFIX
 
@@ -19,14 +19,14 @@ const capitalized_prefix =
  * @param {string} category - Category of the block. If not provided, it defaults to "common"
  * @returns {void} void
  */
-const register_block = ({
+const register_block = async ({
   block_folder_name,
   icon = 'block-default',
-  category = 'layout'
+  category = 'layout',
 }) => {
   const BLOCK_PATH = `./blocks/${block_folder_name}`
 
-  ;(async BLOCK_PATH => {
+  await (async (BLOCK_PATH) => {
     const block_model = await require(`${BLOCK_PATH}/model.json`)
 
     const block_meta = block_model.block_meta
@@ -65,7 +65,7 @@ const register_block = ({
               ) {
                 Object.entries(
                   REPEATER_LVL1_RAW_ATTRS.field_meta.subfields[rKey].field_meta
-                    .subfields
+                    .subfields,
                 ).forEach(([rrKey, rrVal]) => {
                   REPEATER_LVL1_RAW_ATTRS.field_meta.subfields[
                     rKey
@@ -77,18 +77,17 @@ const register_block = ({
                     !REPEATER_LVL1_RAW_ATTRS.field_meta.subfields[
                       rKey
                     ].field_meta.subfields[rrKey].field_meta.hasOwnProperty(
-                      'label'
+                      'label',
                     )
                   ) {
                     REPEATER_LVL1_RAW_ATTRS.field_meta.subfields[
                       rKey
-                    ].field_meta.subfields[
-                      rrKey
-                    ].field_meta.label = toPascalCase(rrKey)
+                    ].field_meta.subfields[rrKey].field_meta.label =
+                      toPascalCase(rrKey)
                   }
                 })
               }
-            }
+            },
           )
           FORMATTED_RAW_ATTRS[key] = { ...REPEATER_LVL1_RAW_ATTRS }
         }
@@ -102,7 +101,7 @@ const register_block = ({
 
     if (block_meta?.keywords) {
       block_keywords = [`${capitalized_prefix} Block`, ...block_meta.keywords]
-      block_keywords = block_keywords.map(keyword => __(keyword))
+      block_keywords = block_keywords.map((keyword) => __(keyword))
     }
 
     const PREFIXED_NAME = `${capitalized_prefix}/${block_meta.BLOCK_TITLE}`
@@ -118,8 +117,8 @@ const register_block = ({
       ? null
       : {
           attributes: {
-            cover: `${trBlocksGlobal.trbsfDirUrl}blocks/${block_folder_name}/example.jpg`
-          }
+            cover: `${trBlocksGlobal.trbsfDirUrl}blocks/${block_folder_name}/example.jpg`,
+          },
         }
 
     registerBlockType(
@@ -132,9 +131,9 @@ const register_block = ({
         keywords: block_keywords,
         attributes: block_attributes,
         supports: {
-          html: false
+          html: false,
         },
-        edit: props => [
+        edit: (props) => [
           (() => {
             if (block_meta?.hasSidebar) {
               return (
@@ -162,11 +161,11 @@ const register_block = ({
               trRawAttrs={FORMATTED_RAW_ATTRS}
               grid={grid}
             />
-          </TrEditBlockWrap>
+          </TrEditBlockWrap>,
         ],
-        save: props => <View {...props.attributes} />,
-        example: exampleValue
-      }
+        save: (props) => <View {...props.attributes} />,
+        example: exampleValue,
+      },
     )
   })(BLOCK_PATH)
 }

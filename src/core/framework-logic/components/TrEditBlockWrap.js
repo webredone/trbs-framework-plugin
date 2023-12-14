@@ -3,17 +3,16 @@ const { Dashicon } = wp.components
 
 import {
   trBlockImagePreviewShow,
-  trBlockImagePreviewHide
+  trBlockImagePreviewHide,
 } from '../helpers/trBlockImagePreview.js'
 import TrTooltip from './TrTooltip.js'
-// const { useEffect } = wp.element;
 
 const TrEditBlockWrap = ({
   blockTitle,
   className,
   exampleSrc,
   help,
-  children: editBlockCode
+  children: editBlockCode,
 }) => {
   const [isUncollapsed, setIsUncollapsed] = useState(false)
 
@@ -26,7 +25,7 @@ const TrEditBlockWrap = ({
       <div
         className="tr-block__collapsed"
         onClick={() =>
-          setIsUncollapsed(prevIsUncollapsed => !prevIsUncollapsed)
+          setIsUncollapsed((prevIsUncollapsed) => !prevIsUncollapsed)
         }
       >
         <h2>{blockTitle}</h2>
@@ -41,7 +40,9 @@ const TrEditBlockWrap = ({
             <div
               data-src={exampleSrc}
               className="tr-block__example"
-              onMouseEnter={e => trBlockImagePreviewShow(e.target.dataset.src)}
+              onMouseEnter={(e) =>
+                trBlockImagePreviewShow(e.target.dataset.src)
+              }
               onMouseLeave={trBlockImagePreviewHide}
             >
               <Dashicon icon="visibility" />

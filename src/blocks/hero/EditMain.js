@@ -1,7 +1,9 @@
 import TrDefaultFieldsHandler from '../../core/framework-logic/components/block-elements/TrDefaultFieldsHandler'
 
-const EditMain = props => {
+const EditMain = (props) => {
   const { className } = props
+
+  console.log('inside edit main', props)
 
   return (
     <div className={`${className}`}>

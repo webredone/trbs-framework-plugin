@@ -1,6 +1,5 @@
-// const compose = wp.compose;
-const { Card, CardHeader, CardBody, ColorPalette } = wp.components
 const { __ } = wp.i18n
+const { Card, CardHeader, CardBody, ColorPalette } = wp.components
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -8,7 +7,7 @@ import TrTooltip from '../TrTooltip.js'
 const TrColorPicker = ({ fieldData }) => {
   const { field_object, meta } = fieldData
 
-  const handleChange = fieldValue => {
+  const handleChange = (fieldValue) => {
     const newValue = { ...field_object }
     newValue.value = fieldValue
     trUpdateField(fieldData, newValue)

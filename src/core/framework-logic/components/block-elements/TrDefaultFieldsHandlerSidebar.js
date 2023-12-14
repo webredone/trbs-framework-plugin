@@ -14,7 +14,7 @@ const TrDefaultFieldsHandlerSidebar = (props) => {
   })
 
   const sidebar_fields = Object.keys(attributes).filter((objName) =>
-    objName.startsWith('inspector_')
+    objName.startsWith('inspector_'),
   )
 
   return (

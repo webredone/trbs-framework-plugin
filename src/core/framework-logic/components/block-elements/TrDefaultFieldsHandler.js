@@ -24,16 +24,16 @@ const TrDefaultFieldsHandler = (props) => {
   })
 
   const allFields = Object.keys(attributes).filter(
-    (objName) => !objName.startsWith('inspector_')
+    (objName) => !objName.startsWith('inspector_'),
   )
 
   const defaultFieldObjects = allFields.filter(
-    (objName) => !trRawAttrs[objName].field_meta.hasOwnProperty('col')
+    (objName) => !trRawAttrs[objName].field_meta.hasOwnProperty('col'),
   )
 
   const colFieldObjects = (colVar) =>
     Object.keys(attributes).filter(
-      (objName) => trRawAttrs[objName].field_meta?.col === colVar
+      (objName) => trRawAttrs[objName].field_meta?.col === colVar,
     )
 
   if (!grid) {

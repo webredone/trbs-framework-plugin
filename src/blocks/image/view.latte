@@ -1,5 +1,6 @@
 {if !empty($image['src'])}
-{var $is_dark_cls = $inspector_bg_is_dark['checked'] ? ' dark' : ''}
+{var $is_dark_cls =  !empty($inspector_bg_is_dark) && !empty($inspector_bg_is_dark['checked']) && $inspector_bg_is_dark['checked'] ? ' dark' : ''}
+
 
 	{if $link['url']}
 		<a {tr_a($link, "wp-figure-link", true)|noescape}>
@@ -19,3 +20,4 @@
 	{/if}
 
 {/if}
+

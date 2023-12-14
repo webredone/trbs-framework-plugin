@@ -12,7 +12,7 @@ const TrFreeform = ({ fieldData }) => {
 
   const [trUniqueID] = useState(uuidv4())
 
-  const handleChange = fieldNewValue => {
+  const handleChange = (fieldNewValue) => {
     const newValue = { ...field_object }
     newValue.text = fieldNewValue
     trUpdateField(fieldData, newValue)
@@ -31,11 +31,11 @@ const TrFreeform = ({ fieldData }) => {
         <BlockEdit
           name="core/freeform"
           attributes={{
-            content: field_object.text
+            content: field_object.text,
           }}
           clientId={trUniqueID}
           isSelected={false}
-          setAttributes={state => {
+          setAttributes={(state) => {
             return state.content !== undefined
               ? handleChange(state.content)
               : null

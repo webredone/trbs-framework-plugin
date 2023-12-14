@@ -1,5 +1,5 @@
-const { CheckboxControl, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
+const { CheckboxControl, Card, CardHeader, CardBody } = wp.components
 
 import trUpdateField from '../../helpers/trUpdateField'
 

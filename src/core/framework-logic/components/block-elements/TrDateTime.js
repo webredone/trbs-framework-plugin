@@ -1,5 +1,5 @@
-const { DateTimePicker, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
+const { DateTimePicker, Card, CardHeader, CardBody } = wp.components
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -7,7 +7,7 @@ import TrTooltip from '../TrTooltip.js'
 const trDateTime = ({ fieldData }) => {
   const { field_object, meta } = fieldData
 
-  const handleChange = fieldNewValue => {
+  const handleChange = (fieldNewValue) => {
     const newValue = { ...field_object }
     newValue.value = fieldNewValue
     trUpdateField(fieldData, newValue)

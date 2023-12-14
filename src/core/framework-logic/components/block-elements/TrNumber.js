@@ -1,5 +1,5 @@
-const { TextControl, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
+const { TextControl, Card, CardHeader, CardBody } = wp.components
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -14,7 +14,7 @@ const TrNumber = ({ fieldData }) => {
 
   let Component = TextControl
 
-  const updateField = fieldNewValue => {
+  const updateField = (fieldNewValue) => {
     const newValue = { ...field_object }
     newValue.value = +fieldNewValue
 

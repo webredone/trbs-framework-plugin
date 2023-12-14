@@ -1,6 +1,6 @@
+const { __ } = wp.i18n
 const { useState, Fragment } = wp.element
 const { Button, Dashicon, Card, CardHeader, CardBody } = wp.components
-const { __ } = wp.i18n
 
 import TrField from './TrField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -16,7 +16,7 @@ const RenderRepeaterSubField = ({
   field_object,
   meta,
   fieldIndex,
-  subField
+  subField,
 }) => {
   const subFieldType = subField.field_meta.type
 
@@ -27,7 +27,7 @@ const RenderRepeaterSubField = ({
       meta: subField.field_meta,
       repeater_object: field_object,
       repeater_name: meta.field_name,
-      repeater_index: fieldIndex
+      repeater_index: fieldIndex,
     }
     return <TrField fieldData={{ ...fieldRepeaterData }} />
   } else {
@@ -38,14 +38,14 @@ const RenderRepeaterSubField = ({
       meta: subField.field_meta,
       repeater_parent_object: field_object,
       repeater_parent_name: meta.field_name,
-      repeater_parent_index: fieldIndex
+      repeater_parent_index: fieldIndex,
     }
     return <TrRepeaterRepeater fieldData={{ ...fieldRepeaterRepeaterData }} />
   }
 }
 
 const TrRepeater = ({
-  fieldData
+  fieldData,
   // meta with the info about field types
 }) => {
   const { field_object, meta, setAttributes } = fieldData
@@ -54,10 +54,10 @@ const TrRepeater = ({
   const [isOpenDeletePrompt, setIsOpenDeletePrompt] = useState(false)
 
   const [repeaterItemsStates, setRepeaterItemsStates] = useState(() =>
-    field_object.map(_ => ({
+    field_object.map((_) => ({
       isUncollapsed: false,
-      isBeingTriedToDelete: false
-    }))
+      isBeingTriedToDelete: false,
+    })),
   )
 
   let fields_grid = null
@@ -118,27 +118,27 @@ const TrRepeater = ({
   // ADD NEW SUBFIELD ------------------------------------------
   const handleAddRepeaterField = () => {
     const newObjToBeAdded = {}
-    Object.keys(subfields).forEach(subFieldName => {
+    Object.keys(subfields).forEach((subFieldName) => {
       const subfield_schema = subfields[subFieldName]
       if (subfield_schema.field_meta.type === 'repeater') {
         // IF SUBFIELD IS OF TYPE REPEATER
         newObjToBeAdded[subfield_schema.field_meta.field_name] = [
-          ...subfield_schema.default
+          ...subfield_schema.default,
         ]
       } else {
         // SUBFIELD IS NOT OF TYPE REPEATER
         newObjToBeAdded[subfield_schema.field_meta.field_name] = {
-          ...subfield_schema.default
+          ...subfield_schema.default,
         }
       }
     })
     const updatedRepeaterValues = [...field_object, newObjToBeAdded]
     setAttributes({
-      [meta.field_name]: updatedRepeaterValues
+      [meta.field_name]: updatedRepeaterValues,
     })
     const updatedRepeaterItemsStates = [
       ...repeaterItemsStates,
-      { isUncollapsed: true, isBeingTriedToDelete: false }
+      { isUncollapsed: true, isBeingTriedToDelete: false },
     ]
     setRepeaterItemsStates(updatedRepeaterItemsStates)
   }
@@ -147,13 +147,13 @@ const TrRepeater = ({
   const handleRemoveRepeaterField = (e, index) => {
     e.stopPropagation()
     let updatedRepeaterValues = field_object.filter(
-      (_, fieldIndex) => fieldIndex !== index
+      (_, fieldIndex) => fieldIndex !== index,
     )
     setAttributes({
-      [meta.field_name]: updatedRepeaterValues
+      [meta.field_name]: updatedRepeaterValues,
     })
     const updatedRepeaterItemsStates = [
-      ...repeaterItemsStates.filter((_, itemIndex) => itemIndex !== index)
+      ...repeaterItemsStates.filter((_, itemIndex) => itemIndex !== index),
     ]
     setRepeaterItemsStates(updatedRepeaterItemsStates)
     setIsOpenDeletePrompt(false)
@@ -167,12 +167,10 @@ const TrRepeater = ({
       const newUncollapsedState = index === rep_item_index ? true : false
       const newBeingTriedToDeleteState = index === rep_item_index ? true : false
 
-      updatedRepeaterItemsStates[
-        rep_item_index
-      ].isUncollapsed = newUncollapsedState
-      updatedRepeaterItemsStates[
-        rep_item_index
-      ].isBeingTriedToDelete = newBeingTriedToDeleteState
+      updatedRepeaterItemsStates[rep_item_index].isUncollapsed =
+        newUncollapsedState
+      updatedRepeaterItemsStates[rep_item_index].isBeingTriedToDelete =
+        newBeingTriedToDeleteState
     })
     setRepeaterItemsStates(updatedRepeaterItemsStates)
     setIsOpenDeletePrompt(true)
@@ -183,9 +181,8 @@ const TrRepeater = ({
     const updatedRepeaterItemsStates = [...repeaterItemsStates]
     updatedRepeaterItemsStates.forEach((_, rep_item_index) => {
       const newCollapseState = fieldIndex === rep_item_index ? true : false
-      updatedRepeaterItemsStates[
-        rep_item_index
-      ].isUncollapsed = newCollapseState
+      updatedRepeaterItemsStates[rep_item_index].isUncollapsed =
+        newCollapseState
       updatedRepeaterItemsStates[rep_item_index].isBeingTriedToDelete = false
     })
     setRepeaterItemsStates(updatedRepeaterItemsStates)
@@ -197,9 +194,8 @@ const TrRepeater = ({
     if (isOpenDeletePrompt) return
 
     const updatedRepeaterItemsStates = [...repeaterItemsStates]
-    updatedRepeaterItemsStates[
-      fieldIndex
-    ].isUncollapsed = !updatedRepeaterItemsStates[fieldIndex].isUncollapsed
+    updatedRepeaterItemsStates[fieldIndex].isUncollapsed =
+      !updatedRepeaterItemsStates[fieldIndex].isUncollapsed
     setRepeaterItemsStates(updatedRepeaterItemsStates)
   }
 
@@ -214,13 +210,13 @@ const TrRepeater = ({
     updatedRepeaterItemsStates[newPos] = repeaterItemsStates[index]
 
     setAttributes({
-      [meta.field_name]: updatedRepeaterValues
+      [meta.field_name]: updatedRepeaterValues,
     })
 
     setRepeaterItemsStates(updatedRepeaterItemsStates)
   }
 
-  const TryDeleteActionHTML = fieldIndex => {
+  const TryDeleteActionHTML = (fieldIndex) => {
     return (
       <Fragment>
         <span>Are you sure?</span>
@@ -228,7 +224,7 @@ const TrRepeater = ({
           <TrTooltip tooltip="Yes. Delete." custom>
             <button
               className="confirm-delete"
-              onClick={e => handleRemoveRepeaterField(e, fieldIndex)}
+              onClick={(e) => handleRemoveRepeaterField(e, fieldIndex)}
             >
               <Dashicon icon="yes" />
             </button>
@@ -236,7 +232,7 @@ const TrRepeater = ({
           <TrTooltip tooltip="No. Abort." custom>
             <button
               className="abandon-delete"
-              onClick={e => handleAbandonDeletePrompt(e, fieldIndex)}
+              onClick={(e) => handleAbandonDeletePrompt(e, fieldIndex)}
             >
               <Dashicon icon="no-alt" />
             </button>
@@ -275,14 +271,14 @@ const TrRepeater = ({
       console.log('subFields: ', subfields)
 
       const defaultFieldObjects = allFields.filter(
-        objName => !subfields[objName].field_meta.hasOwnProperty('col')
+        (objName) => !subfields[objName].field_meta.hasOwnProperty('col'),
       )
 
       console.log('defaultFieldObjects: ', defaultFieldObjects)
 
-      const colFieldObjects = colVar =>
+      const colFieldObjects = (colVar) =>
         Object.keys(subfields).filter(
-          objName => subfields[objName].field_meta?.col === colVar
+          (objName) => subfields[objName].field_meta?.col === colVar,
         )
 
       subFieldsHTML = (
@@ -323,7 +319,7 @@ const TrRepeater = ({
                           key={`col_${colIndex}`}
                         />
                       )
-                    }
+                    },
                   )}
                 </div>
               )
@@ -377,7 +373,7 @@ const TrRepeater = ({
           className="tr-repeater__wrap"
           style={{
             gridTemplateColumns: `repeat(${grid}, 1fr)`,
-            gridGap: `${gridGap}px`
+            gridGap: `${gridGap}px`,
           }}
         >
           {field_object.map((field, fieldIndex) => {
@@ -385,7 +381,7 @@ const TrRepeater = ({
               <Card size="small" key={fieldIndex} className="tr-repeater__item">
                 <CardHeader
                   className="tr-repeater__item__header"
-                  onClick={e => {
+                  onClick={(e) => {
                     handleCollapseUncollapse(e, fieldIndex)
                   }}
                 >
@@ -409,7 +405,7 @@ const TrRepeater = ({
                     <TrTooltip tooltip="Move one position up" custom>
                       <button
                         className="tr-reorder"
-                        onClick={e => handleReorderField(e, fieldIndex, 'up')}
+                        onClick={(e) => handleReorderField(e, fieldIndex, 'up')}
                       >
                         <Dashicon icon="arrow-left-alt" />
                       </button>
@@ -421,7 +417,7 @@ const TrRepeater = ({
                       <TrTooltip tooltip="Move one position down" custom>
                         <button
                           className="tr-reorder"
-                          onClick={e =>
+                          onClick={(e) =>
                             handleReorderField(e, fieldIndex, 'down')
                           }
                         >
@@ -450,7 +446,7 @@ const TrRepeater = ({
                       <TrTooltip tooltip={`Remove ${item_label}`} custom>
                         <button
                           className="tr-remove"
-                          onClick={e => handleOpenDeletePrompt(e, fieldIndex)}
+                          onClick={(e) => handleOpenDeletePrompt(e, fieldIndex)}
                         >
                           <Dashicon icon="no-alt" />
                         </button>

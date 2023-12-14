@@ -1,5 +1,5 @@
-const { ToggleControl, Card, CardHeader, CardBody } = wp.components
 const { __ } = wp.i18n
+const { ToggleControl, Card, CardHeader, CardBody } = wp.components
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'

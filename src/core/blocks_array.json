@@ -1,7 +1,3 @@
 {
-  "blocks_array": [
-    "hero",
-    "breadcrumbs",
-    "image"
-  ]
+  "blocks_array": ["hero", "breadcrumbs", "image"]
 }

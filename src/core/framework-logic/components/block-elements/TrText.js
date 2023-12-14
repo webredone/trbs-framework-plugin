@@ -1,14 +1,9 @@
-const {
-  TextControl,
-  TextareaControl,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter
-} = wp.components
+const { TextControl, TextareaControl, Card, CardHeader, CardBody, CardFooter } =
+  wp.components
+
+const { useState, useEffect } = wp.element
 
 const { RichText } = wp.blockEditor
-const { useState, useEffect } = wp.element
 const { __ } = wp.i18n
 
 import trUpdateField from '../../helpers/trUpdateField.js'
@@ -32,7 +27,7 @@ const TrText = ({ fieldData }) => {
   const [charsLeft, setCharsLeft] = useState(() =>
     hasCharsLimit
       ? meta.max_chars - stripHtmlAndReturnText(field_object.text).length
-      : null
+      : null,
   )
 
   let Component = TextControl
@@ -41,11 +36,11 @@ const TrText = ({ fieldData }) => {
     meta.variation === 'rich' && (Component = RichText)
   }
 
-  const maxCharsOK = fieldNewValue => {
+  const maxCharsOK = (fieldNewValue) => {
     return stripHtmlAndReturnText(fieldNewValue).length < meta.max_chars
   }
 
-  const updateField = fieldNewValue => {
+  const updateField = (fieldNewValue) => {
     const newValue = { ...field_object }
 
     if (!hasCharsLimit || maxCharsOK(fieldNewValue)) {
@@ -57,7 +52,7 @@ const TrText = ({ fieldData }) => {
     trUpdateField(fieldData, newValue)
   }
 
-  const handleChange = fieldNewValue => {
+  const handleChange = (fieldNewValue) => {
     // update temp string that doesn't exceed defined max chars count
     if (hasCharsLimit) {
       if (maxCharsOK(fieldNewValue)) {
@@ -67,7 +62,7 @@ const TrText = ({ fieldData }) => {
       showAlertIfMaxCharsExceeded(meta.max_chars, fieldNewValue)
       updateField(fieldNewValue)
       setCharsLeft(
-        meta.max_chars - stripHtmlAndReturnText(fieldNewValue).length
+        meta.max_chars - stripHtmlAndReturnText(fieldNewValue).length,
       )
     } else {
       updateField(fieldNewValue)

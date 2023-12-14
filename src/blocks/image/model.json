@@ -3,7 +3,7 @@
     "BLOCK_REGISTER_NAME": "image",
     "BLOCK_TITLE": "Image",
     "keywords": ["image", "photo", "figure"],
-    "hasSidebar": true,
+    "hasSidebar": false,
     "hasExample": true,
     "deps": {
       "css": ["lazy-load-images", "shared-css-1", "shared-css-2"],

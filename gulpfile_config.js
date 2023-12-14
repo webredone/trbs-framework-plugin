@@ -8,9 +8,9 @@ const config = {
       watch: [
         './src/core/framework-logic/scss/blocks-backend.scss',
         './src/core/framework-logic/scss/**/*.scss',
-        './src/blocks/**/_editor.scss'
+        './src/blocks/**/_editor.scss',
       ],
-      sourcemaps: './css-maps'
+      sourcemaps: './css-maps',
     },
     fe_blocks_shared: {
       src: './src/blocks_shared_css_and_js/css/*.scss',
@@ -18,8 +18,8 @@ const config = {
       watch: ['./src/blocks_shared_css_and_js/css/*.scss'],
       sourcemaps: './css-maps',
       rename: {
-        suffix: '.min'
-      }
+        suffix: '.min',
+      },
     },
     fe_blocks_single: {
       src: './src/blocks/**/frontend.scss',
@@ -27,9 +27,9 @@ const config = {
       watch: ['./src/blocks/**/frontend.scss'],
       sourcemaps: './css-maps',
       rename: {
-        suffix: '.min'
-      }
-    }
+        suffix: '.min',
+      },
+    },
   },
 
   js: {
@@ -39,8 +39,8 @@ const config = {
       watch: ['./src/blocks_shared_css_and_js/js/*.js'],
       outdir: `${OUT_DIR}/blocks-shared`,
       rename: {
-        suffix: '.min'
-      }
+        suffix: '.min',
+      },
     },
     fe_blocks_single: {
       src: './src/blocks/**/frontend.js',
@@ -48,21 +48,20 @@ const config = {
       watch: ['./src/blocks/**/frontend.js'],
       outdir: `${OUT_DIR}/block-specific`,
       rename: {
-        suffix: '.min'
-      }
-    }
+        suffix: '.min',
+      },
+    },
   },
 
   latte: {
-    watch: './**/*.latte'
-  }
+    watch: './**/*.latte',
+  },
 }
-
 
 const config_webpack_js_admin_blocks = {
   watch: [
-    './src/core/framework-logic/blocks.js',
-    './src/core/framework-logic/register_block.js',
+    './src/blocks.js',
+    './src/register_block.js',
     './src/blocks/**/*.js',
     '!./src/blocks/**/frontend.js', // Exclude frontend.js files
     '!./src/blocks/**/frontend-js/*.js', // Exclude frontend.js files
@@ -74,15 +73,15 @@ const config_webpack_js_admin_blocks = {
     './src/blocks/**/model.json',
     './src/blocks/**/EditMain.js',
     './src/blocks/**/EditSidebar.js',
-    './src/blocks/**/View.js'
-  ]
+    './src/blocks/**/View.js',
+  ],
 }
 
 // export default config
 
 const compilation_config = {
   config,
-  config_webpack_js_admin_blocks
+  config_webpack_js_admin_blocks,
 }
 
-export default compilation_config
+module.exports = compilation_config

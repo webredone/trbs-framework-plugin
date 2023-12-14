@@ -1,6 +1,6 @@
+const { __ } = wp.i18n
 const { useState } = wp.element
 const { Button, Dashicon, Card, CardHeader, CardBody } = wp.components
-const { __ } = wp.i18n
 
 import TrField from './TrField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -23,7 +23,7 @@ const TrRepeaterRepeater = ({ fieldData }) => {
     field_object.map((_) => ({
       isUncollapsed: false,
       isBeingTriedToDelete: false,
-    }))
+    })),
   )
 
   let minRep = 0

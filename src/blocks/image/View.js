@@ -1,3 +1,3 @@
-const View = () => null;
+const View = () => null
 
-export default View;
+export default View

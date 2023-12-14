@@ -1,6 +1,6 @@
+const { __ } = wp.i18n
 const { URLInput } = wp.blockEditor
 const { TextControl, ToggleControl, Card, CardHeader, CardBody } = wp.components
-const { __ } = wp.i18n
 
 import trUpdateField from '../../helpers/trUpdateField.js'
 import TrTooltip from '../TrTooltip.js'
@@ -8,7 +8,7 @@ import TrTooltip from '../TrTooltip.js'
 const TrCta = ({ fieldData }) => {
   const { field_object, meta } = fieldData
 
-  const hasProp = propName => field_object.hasOwnProperty(propName)
+  const hasProp = (propName) => field_object.hasOwnProperty(propName)
 
   const handleUpdate = (subFieldName, subFieldNewValue = null) => {
     const newValue = { ...field_object }
@@ -36,7 +36,7 @@ const TrCta = ({ fieldData }) => {
             <TextControl
               label="Text"
               value={field_object.title}
-              onChange={newValue => handleUpdate('title', newValue)}
+              onChange={(newValue) => handleUpdate('title', newValue)}
             />
           </div>
         )}
@@ -45,7 +45,7 @@ const TrCta = ({ fieldData }) => {
           <URLInput
             label="Url"
             value={field_object.url}
-            onChange={newValue => handleUpdate('url', newValue)}
+            onChange={(newValue) => handleUpdate('url', newValue)}
           />
         </div>
 
